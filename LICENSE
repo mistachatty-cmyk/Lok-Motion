@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 mistachatty-cmyk
+Copyright (c) 2026 Eric — GSix Network & Lok Services
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+--- Third-party notice ---
+
+Anime.js, GSAP and Motion are loaded at runtime from their public CDNs and are
+NOT redistributed by this project. They remain the property of their respective
+authors under their own licenses. Components catalogued in the Library Catalog
+section are indexed by name and link only; no third-party source is included,
+mirrored, or rehosted in this repository.
