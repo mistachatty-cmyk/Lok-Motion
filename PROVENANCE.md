@@ -1,4 +1,4 @@
-# Provenance
+ # Provenance
 
 Every component in Lok Motion is traceable. This file is the record.
 Nothing enters the library without an entry here.
@@ -12,20 +12,24 @@ or a buyer that the code is clean.
 
 ---
 
-## Original components — 57
+## Original components — 130
 
-All 57 demos in `LIB` are **original code written for Lok Motion**. None are copied,
+All 130 demos in `LIB` are **original code written for Lok Motion**. None are copied,
 ported, or derived from another library's source. Licensed MIT.
 
 | Engine | Count | Dependency | Redistributed? |
 |---|---|---|---|
-| CSS native | 30 | none | n/a |
-| Canvas / WebGL | 6 | none (browser APIs) | n/a |
-| Anime.js | 8 | `animejs@4` via jsDelivr CDN | **No** — loaded at runtime |
-| GSAP | 7 | `gsap@3` via jsDelivr CDN | **No** — loaded at runtime |
-| Motion | 6 | `motion@12` via jsDelivr CDN | **No** — loaded at runtime |
+| CSS native | 67 | none | n/a |
+| Canvas / WebGL | 20 | none (browser APIs) | n/a |
+| Anime.js | 12 | `animejs@4` via jsDelivr CDN | **No** — loaded at runtime |
+| GSAP | 10 | `gsap@3` via jsDelivr CDN | **No** — loaded at runtime |
+| Motion | 9 | `motion@12` via jsDelivr CDN | **No** — loaded at runtime |
+| Three.js | 7 | `three@0.160` via jsDelivr CDN | **No** — loaded at runtime |
+| Matter.js | 5 | `matter-js@0.20` via jsDelivr CDN | **No** — loaded at runtime |
 
-The 21 engine-backed demos call public APIs of libraries the user's browser loads
+`lok-rotator.js` is original, zero-dependency, MIT.
+
+The 43 engine-backed demos call public APIs of libraries the user's browser loads
 directly from the vendor's CDN. That is the intended, documented use of those CDNs.
 No engine source is vendored into this repository.
 
@@ -35,7 +39,7 @@ not derivative.
 
 ---
 
-## Catalogued libraries — 10, 141 components
+## Catalogued libraries — 11, 162 components
 
 Indexed by **name and deep link only**. No source is included, mirrored, cached, or
 rehosted. Clicking a catalog pill opens the vendor's own documentation page.
@@ -48,6 +52,8 @@ rehosted. Clicking a catalog pill opens the vendor's own documentation page.
 | Three.js | MIT | ✅ |
 | shadcn/ui | MIT | ✅ |
 | Magic UI | MIT | ✅ |
+| Three.js | MIT | ✅ |
+| Matter.js | MIT | ✅ |
 | GSAP | Reported free under Webflow | ⚠️ **VERIFY** |
 | React Bits | — | ⚠️ **VERIFY** |
 | Kokonut UI | — | ⚠️ **VERIFY** |
