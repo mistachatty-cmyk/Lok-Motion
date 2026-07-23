@@ -1,4 +1,4 @@
- # Lok Motion
+# Lok Motion
 
 **See any animation library running your own words — before you install it.**
 
@@ -142,6 +142,8 @@ badge and nav item — with heavy Archivo at tight negative tracking for display
 | GSAP | `#8BE84A` |
 | Motion | `#8B7CFF` |
 | Canvas/WebGL | `#FFB454` |
+| Three.js | `#54C7FF` |
+| Matter.js | `#FF7A45` |
 
 `prefers-reduced-motion` respected throughout.
 

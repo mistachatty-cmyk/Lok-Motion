@@ -1,4 +1,4 @@
- # Provenance
+# Provenance
 
 Every component in Lok Motion is traceable. This file is the record.
 Nothing enters the library without an entry here.
