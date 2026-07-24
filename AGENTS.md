@@ -157,6 +157,21 @@ All changes must be documented in this file and MASTER-ROADMAP.md.
 - **Fix**: Changed to `import { LIB as ORIG_LIB, ... }` — uses correct ES module rename syntax
 - **Also**: `_LIB` references in creator JS changed to `ORIG_LIB`
 
+### Hotfix: USER_COMP Temporal Dead Zone — blank page (Jul 2026)
+- **Issue**: Blank page after component creator features were added
+- **Root cause**: `let LIB=ORIG_LIB.concat(USER_COMP)` executed before `const USER_COMP=[]` was declared (21 lines later). ES module `const` is in Temporal Dead Zone until declaration — accessing it threw ReferenceError, killing the entire module
+- **File & lines**: `index.html:845`
+- **Fix**: Moved `const USER_COMP=[]` to line 845, right after imports and before the `LIB` initialization line<｜end▁of▁thinking｜>
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="bash">
+<｜｜DSML｜｜parameter name="command" string="true">git add -A && git commit -m "docs: add hotfix entry for TDZ bug" && git push
+- **Issue**: Left sidebar, grid, and all UI disappeared; page showed blank shell
+- **Root cause**: Line 799 `import { ... _LIB, ... }` — `_LIB` is not an export of `lok-components.js` (exports `LIB`). ES module import failed silently, blocking all JS execution
+- **File & lines**: `index.html:799`
+- **Fix**: Changed to `import { LIB as ORIG_LIB, ... }` — uses correct ES module rename syntax
+- **Also**: `_LIB` references in creator JS changed to `ORIG_LIB`
+
 ### Hotfix: Half-word rendering on text change (Jul 2026)
 - **Issue**: When text changed via rotator or typing, engine-based components (anime, gsap, motion, three, matter) showed half or broken words
 - **Root cause**: `refreshText()` re-executed component JS with `eng=null` for ALL components. Engine-based components received `null` instead of their loaded engine module, silently failing in the try/catch
