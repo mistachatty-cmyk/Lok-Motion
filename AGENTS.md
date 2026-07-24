@@ -149,3 +149,10 @@ All changes must be documented in this file and MASTER-ROADMAP.md.
 3. Apply the fix
 4. Update this file with the change
 5. Update MASTER-ROADMAP.md change log
+
+### Hotfix: Half-word rendering on text change (Jul 2026)
+- **Issue**: When text changed via rotator or typing, engine-based components (anime, gsap, motion, three, matter) showed half or broken words
+- **Root cause**: `refreshText()` re-executed component JS with `eng=null` for ALL components. Engine-based components received `null` instead of their loaded engine module, silently failing in the try/catch
+- **File & lines**: `index.html:1603-1608`
+- **Fix**: Added `hEng = h._comp.eng === 'css' || h._comp.eng === 'gl' ? null : (ENG[h._comp.eng] || null)` — passes the correct engine module to the re-executed JS
+- **Also fixed**: Same pattern for the drawer preview stage (line ~1613)

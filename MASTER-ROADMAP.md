@@ -180,3 +180,9 @@
 | Jul 2026 | Bug fixes: dot animation, card CTA, showreel engine check | Agent |
 | Jul 2026 | AGENTS.md created with full developer documentation | Agent |
 | Jul 2026 | MASTER-ROADMAP.md created merging all roadmaps | Agent |
+| Jul 2026 | Fixes: LokBlock visible, mount bug, refreshText children check, archive button | Agent |
+| Jul 2026 | Hero showcase (top-right particle animation canvas) + settings panel | Agent |
+| Jul 2026 | Showreel auto-retry + adaptive timing (4.2s for three/matter) | Agent |
+| Jul 2026 | Full editor: tabs (Editor/JSON/Install), metadata editing, line numbers, format | Agent |
+| Jul 2026 | Component creator: rail button → form modal → test run → save to USER_COMP | Agent |
+| Jul 2026 | Bugfix: half-word rendering — refreshText now passes correct eng to engine-based components | Agent |
