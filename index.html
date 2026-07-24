@@ -50,7 +50,7 @@ button,input{font-family:inherit}
 @media(max-width:940px){.app{grid-template-columns:1fr}}
 
 /* ═══ RAIL ═══ */
-.rail{border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.rail{border-right:1px solid var(--line);display:flex;flex-direction:column;overflow-y:auto;background:var(--bg)}
 @media(max-width:940px){
   .rail{position:fixed;inset:0 auto 0 0;width:276px;z-index:70;transform:translateX(-100%);
     transition:transform .3s cubic-bezier(.2,.9,.3,1)}
@@ -152,6 +152,10 @@ button,input{font-family:inherit}
   border-radius:100px;padding:10px 20px;font:400 11.5px/1 var(--mono);letter-spacing:.04em;
   cursor:pointer;transition:.16s;display:inline-block}
 .reellink:hover{border-color:var(--acc);background:rgba(94,234,212,.07)}
+.archbtn{margin-top:22px;margin-left:10px;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.3);color:rgba(255,215,0,.8);
+  border-radius:100px;padding:10px 20px;font:400 11.5px/1 var(--mono);letter-spacing:.04em;
+  cursor:pointer;transition:.16s;display:inline-block}
+.archbtn:hover{border-color:rgba(255,215,0,.7);color:#ffd700;background:rgba(255,215,0,.12)}
 .stats{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
 .stat b{display:block;font:700 21px/1 var(--mono);color:var(--acc)}
 .stat span{font:400 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
@@ -343,11 +347,11 @@ textarea:focus{border-color:var(--accd)}
 
 /* ═══ LOKBLOCK — dev console ═══ */
 .lokblock-pill{display:flex;align-items:center;gap:6px;padding:7px 12px;margin:6px 10px 10px;
-  border:1px solid rgba(94,234,212,.15);border-radius:6px;cursor:pointer;
-  font:400 9.5px/1 var(--mono);color:rgba(94,234,212,.5);background:rgba(94,234,212,.02);
+  border:1px solid rgba(94,234,212,.4);border-radius:6px;cursor:pointer;
+  font:400 9.5px/1 var(--mono);color:rgba(94,234,212,.8);background:rgba(94,234,212,.08);
   transition:all .3s ease;animation:lbPulse 4s ease-in-out infinite}
-.lokblock-pill:hover{border-color:rgba(94,234,212,.35);color:rgba(94,234,212,.85);
-  background:rgba(94,234,212,.06)}
+.lokblock-pill:hover{border-color:rgba(94,234,212,.8);color:#5EEAD4;
+  background:rgba(94,234,212,.15)}
 .lokblock-pill .bolt{font-size:11px;line-height:1}
 .lokblock-pill .lbKey{font:400 8px/1 var(--mono);color:rgba(94,234,212,.25);margin-left:auto;letter-spacing:.04em}
 @keyframes lbPulse{0%,100%{box-shadow:0 0 4px rgba(94,234,212,.04)}
@@ -422,6 +426,7 @@ textarea:focus{border-color:var(--accd)}
           star what you like, copy it out.</p>
 
         <button class="reellink" id="reelLink">▶ Play showreel — 12 effects, one after another</button>
+        <button class="archbtn" id="archBtn">📦 Unlock The Archive</button>
 
         <div class="stats">
           <div class="stat"><b id="s1">0</b><span>Live demos</span></div>
@@ -641,6 +646,7 @@ function mountStage(host,c){
       ? '⚠ '+CRED[c.eng].n+' failed to load<br><span style="color:#565C6E">check network / CDN access</span>'
       : 'connecting to '+CRED[c.eng].n+'…';
     if(host._isCard)addStar(host,c);
+    host._mounting=false;
     return;
   }
 
@@ -1030,7 +1036,7 @@ function refreshText(t){
       }
       if(cs.includes('esc(')){
         const s=box.querySelector('.s');
-        if(s&&!s.querySelector('i')){
+        if(s&&s.children.length===0){
           if(h._stops){h._stops.forEach(f=>{try{f();}catch(e){}});h._stops=[];}
           s.textContent=t||' ';return;
         }
@@ -1059,7 +1065,7 @@ function refreshText(t){
         }
         if(cs.includes('esc(')){
           const s=box.querySelector('.s');
-          if(s&&!s.querySelector('i')){s.textContent=t||' ';return;}
+          if(s&&s.children.length===0){s.textContent=t||' ';return;}
         }
       }
     }
@@ -1172,23 +1178,27 @@ rail.addEventListener('touchcancel',endDrag,{passive:true});
    Type iloveyoumerci anywhere to unlock. Konami-code style. */
 let archSeq=[],archUnlocked=false;
 const ARCH_CODE='iloveyoumerci';
+function unlockArchive(){
+  if(archUnlocked)return;
+  archUnlocked=true;
+  const ov=$('#archOver');
+  ov.classList.add('on');
+  setTimeout(()=>ov.classList.add('unlocked'),600);
+  setTimeout(()=>{
+    ov.classList.remove('on');
+    toast('🔓 The Archive unlocked');
+    buildNav();buildChips();
+    FILTER='archive';sync();
+  },3400);
+}
 document.addEventListener('keydown',e=>{
   if(archUnlocked)return;
   if(e.key.length!==1)return;
   archSeq.push(e.key.toLowerCase());
   if(archSeq.length>ARCH_CODE.length)archSeq.shift();
-  if(archSeq.join('')===ARCH_CODE){
-    archUnlocked=true;
-    const ov=$('#archOver');
-    ov.classList.add('on');
-    setTimeout(()=>ov.classList.add('unlocked'),600);
-    setTimeout(()=>{
-      ov.classList.remove('on');
-      toast('🔓 The Archive unlocked');
-      buildNav();buildChips();
-    },3400);
-  }
+  if(archSeq.join('')===ARCH_CODE)unlockArchive();
 });
+$('#archBtn').addEventListener('click',unlockArchive);
 function isArchived(c){return c.tags&&c.tags.includes('archive');}
 
 /* ── boot ── */
