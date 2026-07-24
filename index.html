@@ -156,6 +156,19 @@ button,input{font-family:inherit}
   border-radius:100px;padding:10px 20px;font:400 11.5px/1 var(--mono);letter-spacing:.04em;
   cursor:pointer;transition:.16s;display:inline-block}
 .archbtn:hover{border-color:rgba(255,215,0,.7);color:#ffd700;background:rgba(255,215,0,.12)}
+/* ═══ HERO SHOWCASE — top-right particle animation ═══ */
+.showcase{position:absolute;top:14px;right:14px;width:240px;height:90px;border-radius:6px;
+  overflow:hidden;border:1px solid var(--line);background:#0A0B0E;z-index:3;
+  opacity:.85;transition:opacity .3s;cursor:pointer}
+.showcase:hover{opacity:1;border-color:var(--accd)}
+.showcase canvas{display:block;width:100%;height:100%}
+.showcase-off{opacity:0;pointer-events:none}
+.showcase .shHint{position:absolute;inset:0;display:grid;place-items:center;
+  font:400 7.5px/1 var(--mono);color:var(--ink3);letter-spacing:.12em;opacity:0;
+  transition:opacity .3s}
+.showcase:hover .shHint{opacity:1}
+.showcase .shHint span{background:rgba(10,11,14,.75);padding:3px 8px;border-radius:3px}
+
 .stats{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
 .stat b{display:block;font:700 21px/1 var(--mono);color:var(--acc)}
 .stat span{font:400 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
@@ -323,6 +336,46 @@ textarea:focus{border-color:var(--accd)}
 .note{font:400 10.5px/1.75 var(--mono);color:var(--ink3);margin-top:8px}
 .note a{color:var(--acc);text-decoration:none}
 
+/* ═══ DRAWER TABS & METADATA EDITOR ═══ */
+.dtab{display:flex;border-bottom:1px solid var(--line);background:var(--bg1)}
+.dtab-b{flex:1;background:none;border:0;border-bottom:2px solid transparent;
+  color:var(--ink3);font:400 10px/1 var(--mono);padding:10px;cursor:pointer;letter-spacing:.06em;
+  text-transform:uppercase;transition:.14s}
+.dtab-b:hover{color:var(--ink)}
+.dtab-b.on{border-bottom-color:var(--acc);color:var(--acc)}
+.dtab-p{display:none}
+.dtab-p.on{display:block}
+.dinp{width:100%;background:var(--bg1);border:1px solid var(--line);border-radius:3px;
+  color:var(--ink);font:400 12px/1.6 var(--mono);padding:7px 10px;outline:none;transition:.14s}
+.dinp:focus{border-color:var(--accd)}
+.dflags{display:flex;gap:14px;flex-wrap:wrap}
+.dtag-add{background:none;border:1px solid var(--line);color:var(--accd);border-radius:100px;
+  padding:2px 9px;font:400 9px/1.5 var(--mono);cursor:pointer;margin-left:auto;transition:.14s}
+.dtag-add:hover{border-color:var(--acc);color:var(--acc)}
+.dtag-inp-wrap{margin-top:6px}
+.tag .tag-x{background:none;border:none;color:var(--ink3);cursor:pointer;font-size:10px;margin-left:4px;padding:0 2px;line-height:1}
+.tag .tag-x:hover{color:var(--warn)}
+.code-wrap{display:flex;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.code-wrap textarea{border:0;border-radius:0;resize:none;padding:10px 10px 10px 6px;font:400 11px/1.6 var(--mono);tab-size:2;overflow:auto}
+.code-ln{background:var(--bg2);padding:10px 6px;text-align:right;user-select:none;min-width:32px;
+  font:400 11px/1.6 var(--mono);color:var(--ink3);border-right:1px solid var(--line);overflow:hidden}
+.code-ln span{display:block}
+.json-view{background:var(--bg1);border:1px solid var(--line);border-radius:3px;padding:12px;
+  font:400 10.5px/1.55 var(--mono);color:var(--ink2);overflow:auto;max-height:360px;white-space:pre;tab-size:2}
+.json-imp{width:100%;background:var(--bg1);border:1px solid var(--line);border-radius:3px;
+  color:var(--ink);font:400 10.5px/1.5 var(--mono);padding:10px;resize:vertical;outline:none}
+.json-imp:focus{border-color:var(--accd)}
+
+/* ═══ COMPONENT CREATOR MODAL ═══ */
+.cmod-scrim{position:fixed;inset:0;background:rgba(3,4,7,.8);backdrop-filter:blur(6px);z-index:95}
+.cmod{position:fixed;top:5%;left:50%;transform:translate(-50%,0);width:min(520px,94%);max-height:90vh;
+  background:var(--bg);border:1px solid var(--line);border-radius:8px;z-index:96;display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.cmod-h{display:flex;align-items:center;gap:9px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.cmod-h h3{font:800 16px/1 var(--disp)}
+.cmod-b{flex:1;overflow-y:auto;padding:10px 18px 24px}
+.cmod-b .stng-g{padding:10px 0}
+
 /* ═══ THE ARCHIVE ═══ */
 .archover{position:fixed;inset:0;z-index:100;display:grid;place-items:center;
   background:#0A0B0E;transition:background 2.8s ease;pointer-events:none;opacity:0}
@@ -374,6 +427,44 @@ textarea:focus{border-color:var(--accd)}
 .lokblock-out .lbOk{color:rgba(94,234,212,.8)}
 .lokblock-out .lbInfo{color:rgba(139,124,255,.7)}
 @keyframes lbFadeIn{to{opacity:1}}
+
+/* ═══ SETTINGS PANEL ═══ */
+.stng{position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);z-index:85;background:var(--bg);
+  border-left:1px solid var(--line);transform:translateX(101%);
+  transition:transform .3s cubic-bezier(.2,.9,.3,1);display:flex;flex-direction:column}
+.stng.on{transform:none}
+.stng-h{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px}
+.stng-h h3{font:800 15px/1 var(--disp);letter-spacing:-.03em}
+.stng-h button{margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink2);
+  width:28px;height:28px;border-radius:var(--r);cursor:pointer;font-size:12px;line-height:1}
+.stng-h button:hover{border-color:var(--acc);color:var(--acc)}
+.stng-b{flex:1;overflow-y:auto;padding:14px 18px 40px}
+.stng-g{border-bottom:1px solid var(--line);padding:14px 0}
+.stng-g:last-child{border-bottom:0}
+.stng-lbl{font:400 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.stng-lbl .val{margin-left:auto;color:var(--acc);font-weight:500;text-transform:none}
+.stng-row{display:flex;gap:6px;flex-wrap:wrap}
+.stng-row button{background:var(--bg1);border:1px solid var(--line);color:var(--ink2);
+  border-radius:100px;padding:6px 12px;font:400 10.5px/1 var(--mono);cursor:pointer;transition:.14s}
+.stng-row button:hover{border-color:var(--accd);color:var(--acc)}
+.stng-row button.on{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:600}
+.stng input[type="range"]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;
+  background:var(--line2);outline:none;margin:6px 0}
+.stng input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;
+  border-radius:50%;background:var(--acc);cursor:pointer;border:2px solid var(--bg)}
+.stng input[type="range"]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+  background:var(--acc);cursor:pointer;border:2px solid var(--bg)}
+.stng-tog{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.stng-tog input{display:none}
+.stng-tog .tk{width:32px;height:18px;border-radius:9px;background:var(--line2);position:relative;
+  transition:.2s;flex:none}
+.stng-tog .tk::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;
+  border-radius:50%;background:var(--ink3);transition:.2s}
+.stng-tog input:checked+.tk{background:var(--acc)}
+.stng-tog input:checked+.tk::after{background:var(--acc-ink);left:16px}
+.stng-tog .tl{font:400 11px/1 var(--mono);color:var(--ink2)}
+
 .lokblock-in{display:flex;align-items:center;gap:4px;padding:4px 10px 8px;
   border-top:1px solid rgba(94,234,212,.04)}
 .lokblock-in .lbPrompt{font:400 9.5px/1 var(--mono);color:rgba(94,234,212,.4);user-select:none}
@@ -411,6 +502,7 @@ textarea:focus{border-color:var(--accd)}
         <button class="ic" id="upBtn" title="Upload an image to test with">▣</button>
         <button class="ic" id="clearImg" title="Reset to default image" hidden style="font-size:10px">✕</button>
         <button class="ic" id="favBtn" title="Show favorites">★<span class="badge" id="favN" hidden>0</span></button>
+        <button class="ic" id="setBtn" title="Showcase settings">⚙</button>
         <button class="btn" id="replay">Replay</button>
       </div>
       <div class="chips" id="chips"></div>
@@ -418,6 +510,10 @@ textarea:focus{border-color:var(--accd)}
     <input type="file" id="upFile" accept="image/*" hidden>
 
     <section class="hero">
+      <div class="showcase" id="showcase">
+        <canvas id="shCv"></canvas>
+        <div class="shHint"><span>✦ showcase</span></div>
+      </div>
       <div class="hin">
         <h2>See it running <em>before you install it.</em></h2>
         <p class="sub">Real engines loaded live from their own CDNs. Type your word once and
@@ -495,32 +591,201 @@ textarea:focus{border-color:var(--accd)}
     <button class="x" id="dx">✕</button>
   </div>
   <div class="reelbadge" id="reelBadge" hidden></div>
+  <div class="dtab">
+    <button class="dtab-b on" data-dtab="edit">Editor</button>
+    <button class="dtab-b" data-dtab="json">JSON</button>
+    <button class="dtab-b" data-dtab="install">Install</button>
+  </div>
   <div class="db">
-    <div class="ds" id="dstage"></div>
-    <div class="sec">
-      <div class="lbl">JavaScript <span id="jdirty"></span>
-        <span class="sp"><button id="jrst">Reset</button><button id="jrun">Run ▸</button></span>
+    <div class="dtab-p on" data-dtab="edit">
+      <div class="ds" id="dstage"></div>
+
+      <div class="sec">
+        <div class="lbl">Name <span id="ndirty"></span></div>
+        <input class="dinp" id="dname" spellcheck="false" maxlength="48">
       </div>
-      <textarea id="djs" rows="14" spellcheck="false"></textarea>
-      <p class="note">Scope: <code>root</code>, <code>text</code>, <code>eng</code>, <code>img</code>,
-        <code>onStop</code>, <code>esc</code>, <code>chars</code>, <code>DPR</code>. Edit and Run.</p>
-    </div>
-    <div class="sec">
-      <div class="lbl">CSS <span id="cdirty"></span>
-        <span class="sp"><button id="crst">Reset</button></span>
+      <div class="sec">
+        <div class="lbl">Tags <button class="dtag-add" id="dtagAdd">+ Add</button></div>
+        <div class="tags" id="dtags"></div>
+        <div class="dtag-inp-wrap" id="dtagWrap" hidden>
+          <input class="dinp" id="dtagInp" spellcheck="false" placeholder="tag name" maxlength="24">
+        </div>
       </div>
-      <textarea id="dcss" rows="11" spellcheck="false"></textarea>
-      <p class="note">Live — updates as you type.</p>
+      <div class="sec">
+        <div class="lbl">Category</div>
+        <div class="stng-row" id="dCatRow"></div>
+      </div>
+      <div class="sec">
+        <div class="lbl">Behavior</div>
+        <div class="dflags">
+          <label class="stng-tog"><input type="checkbox" id="dtxt"><span class="tk"></span><span class="tl">Takes your text</span></label>
+          <label class="stng-tog"><input type="checkbox" id="dimg"><span class="tk"></span><span class="tl">Uses uploaded image</span></label>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="lbl">JavaScript <span id="jdirty"></span>
+          <span class="sp">
+            <button id="jfmt" title="Format">≣</button>
+            <button id="jrst">Reset</button>
+            <button id="jrun">Run ▸</button>
+          </span>
+        </div>
+        <div class="code-wrap"><div class="code-ln" id="jln"></div><textarea id="djs" rows="18" spellcheck="false" wrap="off"></textarea></div>
+        <p class="note">Scope: <code>root</code>, <code>text</code>, <code>eng</code>, <code>img</code>,
+          <code>onStop</code>, <code>esc</code>, <code>chars</code>, <code>DPR</code>.</p>
+      </div>
+      <div class="sec">
+        <div class="lbl">CSS <span id="cdirty"></span>
+          <span class="sp">
+            <button id="cfmt" title="Format">≣</button>
+            <button id="crst">Reset</button>
+          </span>
+        </div>
+        <div class="code-wrap"><div class="code-ln" id="cln"></div><textarea id="dcss" rows="15" spellcheck="false" wrap="off"></textarea></div>
+        <p class="note">Live — updates as you type.</p>
+      </div>
     </div>
-    <div class="sec">
-      <div class="lbl">Install <span class="sp"><button id="dcopy">Copy all</button></span></div>
-      <div class="pkg" id="pkg" style="margin-bottom:9px"></div>
-      <div class="cmd" id="dcmd"></div>
-      <p class="note" id="dcred"></p>
+
+    <div class="dtab-p" data-dtab="json">
+      <div class="sec">
+        <div class="lbl">Component JSON
+          <span class="sp"><button id="djsonCopy">Copy</button><button id="djsonDl">Download</button></span>
+        </div>
+        <pre class="json-view" id="djson"></pre>
+      </div>
+      <div class="sec">
+        <div class="lbl">Import JSON <button id="djsonImpBtn">Import</button></div>
+        <textarea class="json-imp" id="djsonImp" rows="8" spellcheck="false" placeholder="Paste component JSON here and click Import…"></textarea>
+      </div>
     </div>
-    <div class="sec"><div class="lbl">Tags</div><div class="tags" id="dtags"></div></div>
+
+    <div class="dtab-p" data-dtab="install">
+      <div class="sec">
+        <div class="lbl">Install <span class="sp"><button id="dcopy">Copy all</button></span></div>
+        <div class="pkg" id="pkg" style="margin-bottom:9px"></div>
+        <div class="cmd" id="dcmd"></div>
+        <p class="note" id="dcred"></p>
+      </div>
+    </div>
   </div>
 </aside>
+
+<aside class="stng" id="stngPanel">
+  <div class="stng-h">
+    <h3>⚙ Showcase</h3>
+    <button id="stngX">✕</button>
+  </div>
+  <div class="stng-b">
+    <div class="stng-g">
+      <div class="stng-lbl">Showcase</div>
+      <label class="stng-tog"><input type="checkbox" id="shToggle" checked><span class="tk"></span><span class="tl">Show top-right animation</span></label>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Transition speed <span class="val" id="shSpeedVal">3.2s</span></div>
+      <input type="range" id="shSpeed" min="1.6" max="8" step=".4" value="3.2">
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Color palette</div>
+      <div class="stng-row" id="shPalRow">
+        <button data-p="cyan" class="on" style="background:rgba(94,234,212,.15);border-color:#5EEAD4;color:#5EEAD4">Cyan</button>
+        <button data-p="pink" style="background:rgba(255,107,157,.1);border-color:#FF6B9D;color:#FF6B9D">Pink</button>
+        <button data-p="gold" style="background:rgba(255,210,74,.1);border-color:#FFD24A;color:#FFD24A">Gold</button>
+        <button data-p="purple" style="background:rgba(139,124,255,.1);border-color:#8B7CFF;color:#8B7CFF">Purple</button>
+        <button data-p="rainbow" style="background:rgba(94,234,212,.08);border-color:var(--ink2);color:var(--ink2)">Rainbow</button>
+      </div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Particle density <span class="val" id="shDenVal">medium</span></div>
+      <div class="stng-row" id="shDenRow">
+        <button data-d="low">Low</button>
+        <button data-d="medium" class="on">Medium</button>
+        <button data-d="high">High</button>
+      </div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Background</div>
+      <div class="stng-row" id="shBgRow">
+        <button data-b="dark" class="on">Dark</button>
+        <button data-b="gradient">Gradient</button>
+        <button data-b="transparent">Transparent</button>
+      </div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Cycle effects</div>
+      <div class="stng-row" id="shFxRow">
+        <button data-f="swarm" class="on">Swarm</button>
+        <button data-f="dissolve" class="on">Dissolve</button>
+        <button data-f="sparkle" class="on">Sparkle</button>
+        <button data-f="ripple">Ripple</button>
+        <button data-f="wave">Wave</button>
+      </div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Words <button class="dtag-add" id="shWordEdit">Edit</button></div>
+      <div id="shWordsDisplay" style="font:400 10.5px/1.5 var(--mono);color:var(--ink3);white-space:pre-wrap">LOK, MOTION, PARTICLE, FLOW, GLITCH, WAVE, FLOAT, SHIMMER</div>
+      <div id="shWordsEdit" hidden style="margin-top:6px">
+        <textarea id="shWordsText" rows="3" class="json-imp" spellcheck="false">LOK, MOTION, PARTICLE, FLOW, GLITCH, WAVE, FLOAT, SHIMMER</textarea>
+        <button class="btn" id="shWordsSave" style="margin-top:6px">Save words</button>
+      </div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Preview</div>
+      <div style="width:100%;height:70px;border-radius:4px;overflow:hidden;border:1px solid var(--line);background:#0A0B0E">
+        <canvas id="shPrev" style="display:block;width:100%;height:100%"></canvas>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="cmod-scrim" id="cmodScrim" hidden></div>
+<div class="cmod" id="cmod" hidden>
+  <div class="cmod-h"><h3>✚ New Component</h3><button class="x" id="cmodX">✕</button></div>
+  <div class="cmod-b">
+    <div class="stng-g">
+      <div class="stng-lbl">Name</div>
+      <input class="dinp" id="cname" spellcheck="false" placeholder="My Component" maxlength="48">
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">ID (auto)</div>
+      <input class="dinp" id="cid" spellcheck="false" readonly style="color:var(--ink3)">
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Category</div>
+      <div class="stng-row" id="cCatRow"></div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Engine</div>
+      <div class="stng-row" id="cEngRow"></div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Behavior</div>
+      <div class="dflags">
+        <label class="stng-tog"><input type="checkbox" id="ctxt" checked><span class="tk"></span><span class="tl">Takes text</span></label>
+        <label class="stng-tog"><input type="checkbox" id="cimg"><span class="tk"></span><span class="tl">Uses image</span></label>
+      </div>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">Tags (comma-separated)</div>
+      <input class="dinp" id="ctags" spellcheck="false" placeholder="loop, stagger, custom">
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">CSS <span class="sp" style="display:inline;margin-left:8px"><button id="ccssDemo" style="font-size:9px;padding:2px 8px">Fill demo</button></span></div>
+      <textarea id="ccss" rows="6" class="json-imp" spellcheck="false" placeholder=".s { ... }"></textarea>
+    </div>
+    <div class="stng-g">
+      <div class="stng-lbl">JavaScript</div>
+      <textarea id="cjs" rows="8" class="json-imp" spellcheck="false" placeholder="root.innerHTML = ..."></textarea>
+    </div>
+    <div class="stng-g" style="border:0">
+      <div style="display:flex;gap:8px">
+        <button class="btn" id="cTest">Test Run</button>
+        <button class="btn" id="cSave" style="background:var(--star);color:#1A1200">Save Component</button>
+      </div>
+      <div id="cTestStage" style="margin-top:10px;width:100%;height:100px;border-radius:4px;overflow:hidden;border:1px solid var(--line);background:var(--bg2)"></div>
+    </div>
+  </div>
+</div>
 
 <div class="archover" id="archOver">
   <div><div class="lk">LOCKED</div><div class="sub">The Archive — hidden experiments await.</div></div>
@@ -531,7 +796,8 @@ textarea:focus{border-color:var(--accd)}
 <script type="module">
 import { LokRotator, autoInit, EFFECT_NAMES } from './lok-rotator.js';
 
-import { BRANDS, ADS, CATS, ENGS, CRED, CSS_LIB, ENGINE_LIB, ARCHIVE_LIB, LIB, LIBS, PKGS } from './lok-components.js';
+import { BRANDS, ADS, CATS, ENGS, CRED, CSS_LIB, ENGINE_LIB, ARCHIVE_LIB, _LIB, LIBS, PKGS } from './lok-components.js';
+let LIB=_LIB.concat(USER_COMP);
 
 /* ═══════════════════════════════════════════════════════════
    LOK MOTION v2.0 — Lok Services
@@ -552,6 +818,7 @@ const DPR=Math.min(window.devicePixelRatio||1,2);
 const ENG={},LOADED={css:true,gl:true,anime:false,gsap:false,motion:false,three:false,matter:false};
 let TEXT=BRANDS[0], FILTER='all', PKG='npm', FAVONLY=false, CUR=null;
 const EDIT={};
+const USER_COMP=[]; /* components created or imported by the user */
 const get=(c,k)=>(EDIT[c.id]&&EDIT[c.id][k]!=null)?EDIT[c.id][k]:c[k];
 const dirty=c=>!!EDIT[c.id];
 
@@ -712,6 +979,8 @@ async function boot(){
   if(ENG.three&&!ENG.three.Scene&&ENG.three.default)ENG.three=ENG.three.default;
   paintStatus();
   document.querySelectorAll('.stage').forEach(h=>{if(h._inView&&!h._mounted)sync(h);});
+  if(reelPending){reelPending=false;startReel();}
+  if(!showcase._inited){showcase._inited=true;shInit();}
 }
 function paintStatus(){
   const nOrigin=LIB.filter(x=>x.eng==='css'||x.eng==='gl').length;
@@ -724,13 +993,189 @@ function paintStatus(){
   }).join('');
 }
 
+/* ── Hero FX — top-right particle showcase ──
+   Cycles through text-based particle effects on a canvas.
+   Loosely inspired by gl-text-particles, but self-contained
+   and tuned for a smaller viewport. */
+const SH_WORDS=['LOK','MOTION','PARTICLE','FLOW','GLITCH','WAVE','FLOAT','SHIMMER'];
+let SH={
+  on:true,wordI:0,phase:0,speed:3.2,den:'medium',modes:{swarm:true,dissolve:true,sparkle:false},
+  active:'swarm',raf:null,t0:0,lastSwitch:0
+};
+function shInit(){
+  const cv=$('#shCv'),p=showcase;
+  if(!cv||!p)return;
+  const r=p.getBoundingClientRect();
+  cv.width=Math.max(1,r.width*DPR);cv.height=Math.max(1,r.height*DPR);
+  cv.style.width=r.width+'px';cv.style.height=r.height+'px';
+  const ctx=cv.getContext('2d');
+  if(!ctx)return;
+  const d=SH;
+  let word=SH_WORDS[0],nextWord=SH_WORDS[1];
+  let parts=[],targets=[],mode='swarm',particles=[],textImg=null;
+  const gap={low:6,medium:4,high:2};
+  const DEN=gap[d.den]||4;
+  function genTargets(w){
+    const t=document.createElement('canvas');
+    t.width=cv.width;t.height=cv.height;
+    const tc=t.getContext('2d');
+    let fs=Math.min(48,Math.floor(cv.width/Math.max(2,w.length)*1.7));
+    tc.fillStyle='#fff';tc.font='900 '+fs+'px Archivo,sans-serif';
+    tc.textAlign='center';tc.textBaseline='middle';
+    tc.fillText(w.slice(0,12),cv.width/2,cv.height/2);
+    const img=tc.getImageData(0,0,cv.width,cv.height).data;
+    const pts=[],g=DEN;
+    for(let y=0;y<cv.height;y+=g)for(let x=0;x<cv.width;x+=g){
+      if(img[(y*cv.width+x)*4+3]>128)pts.push({hx:x,hy:y});
+    }
+    return pts;
+  }
+  function swarmParticles(n){
+    return Array.from({length:n},()=>({
+      x:Math.random()*cv.width,y:Math.random()*cv.height,
+      vx:(Math.random()-.5)*.8,vy:(Math.random()-.5)*.8,
+      size:.8+Math.random()*1.8
+    }));
+  }
+  function switchWord(idx){
+    word=SH_WORDS[idx%SH_WORDS.length];
+    nextWord=SH_WORDS[(idx+1)%SH_WORDS.length];
+    targets=genTargets(word);
+    textImg=null;
+    const modesOn=Object.entries(d.modes).filter(([,v])=>v).map(([k])=>k);
+    mode=modesOn.length?modesOn[Math.floor(Math.random()*modesOn.length)]:'swarm';
+    d.active=mode;
+    if(mode==='swarm'&&particles.length!==targets.length){
+      particles=swarmParticles(targets.length);
+    }
+    if(mode==='sparkle'){
+      parts=targets.map(t=>({x:t.hx,y:t.hy,ox:t.hx,oy:t.hy,
+        phase:Math.random()*Math.PI*2,size:.5+Math.random()*2}));
+    }
+    d.phase=0;
+  }
+  function render(t){
+    const dt=t-d.lastSwitch;
+    if(!d.on||!ctx)return;
+    ctx.fillStyle='rgba(10,11,14,.15)';ctx.fillRect(0,0,cv.width,cv.height);
+    if(!targets.length){d.raf=requestAnimationFrame(render);return;}
+    const progress=Math.min(1,dt/(d.speed*1000));
+    d.phase=progress;
+    if(progress>=1&&d.phase>=1){
+      d.lastSwitch=t;
+      d.wordI=(d.wordI+1)%SH_WORDS.length;
+      switchWord(d.wordI);
+      d.raf=requestAnimationFrame(render);
+      return;
+    }
+    const ease=t=>t<.5?4*t*t*t:1-(-2*t+2)*( -2*t+2)*( -2*t+2)/2;
+    const p=ease(progress);
+    if(mode==='swarm'){
+      ctx.fillStyle='rgba(94,234,212,.7)';
+      for(let i=0;i<targets.length;i++){
+        const tar=targets[i],par=particles[i]||targets[0];
+        if(!tar||!par)continue;
+        const tx=tar.hx+(Math.random()-.5)*(1-p)*12;
+        const ty=tar.hy+(Math.random()-.5)*(1-p)*12;
+        par.vx+=(tx-par.x)*.02;par.vy+=(ty-par.y)*.02;
+        par.vx*=.9;par.vy*=.9;
+        par.x+=par.vx;par.y+=par.vy;
+        ctx.beginPath();ctx.arc(par.x,par.y,par.size*(.7+.3*p)*DPR,0,7);ctx.fill();
+      }
+    }else if(mode==='dissolve'){
+      const spread=(1-p)*50;
+      const alpha=.3+.7*p;
+      ctx.fillStyle='rgba(94,234,212,'+alpha+')';
+      for(const t of targets){
+        const dx=(Math.random()-.5)*spread;
+        const dy=(Math.random()-.5)*spread;
+        ctx.fillRect(t.hx+dx,t.hy+dy,1.6*DPR,1.6*DPR);
+      }
+      if(p>.85){
+        ctx.globalAlpha=(p-.85)/.15;
+        ctx.fillStyle='rgba(94,234,212,.04)';
+        ctx.fillRect(0,0,cv.width,cv.height);
+        ctx.globalAlpha=1;
+      }
+    }else if(mode==='sparkle'){
+      ctx.fillStyle='rgba(94,234,212,.5)';
+      for(const p of parts){
+        const sz=p.size*(.5+.5*Math.sin(t*.003+p.phase));
+        ctx.globalAlpha=.3+.7*Math.sin(t*.004+p.phase)*.5+.5;
+        ctx.beginPath();ctx.arc(p.x,p.y,sz*DPR,0,7);ctx.fill();
+      }
+      ctx.globalAlpha=1;
+    }
+    d.raf=requestAnimationFrame(render);
+  }
+  switchWord(0);
+  d.lastSwitch=performance.now();
+  render(d.lastSwitch);
+  showcase._fxCleanup=()=>{if(d.raf)cancelAnimationFrame(d.raf);};
+}
+function shResize(){
+  const cv=$('#shCv'),p=$('#showcase');
+  if(!cv||!p)return;
+  const r=p.getBoundingClientRect();
+  if(r.width>0&&r.height>0){
+    cv.width=Math.max(1,r.width*DPR);cv.height=Math.max(1,r.height*DPR);
+    cv.style.width=r.width+'px';cv.style.height=r.height+'px';
+  }
+}
+/* click showcase to restart cycle */
+$('#showcase').onclick=()=>{shInit();};
+/* ── settings panel — expanded ── */
+$('#setBtn').onclick=()=>{$('#stngPanel').classList.add('on');$('#scrim').classList.add('on');};
+$('#stngX').onclick=()=>{$('#stngPanel').classList.remove('on');$('#scrim').classList.remove('on');};
+$('#shToggle').onchange=function(){
+  SH.on=this.checked;
+  $('#showcase').classList.toggle('showcase-off',!SH.on);
+  if(SH.on)shInit();
+};
+$('#shSpeed').oninput=function(){
+  SH.speed=parseFloat(this.value);
+  $('#shSpeedVal').textContent=this.value+'s';
+};
+$('#shPalRow').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $('#shPalRow').querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');SH.pal=b.dataset.p;shInit();
+};
+$('#shDenRow').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $('#shDenRow').querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  SH.den=b.dataset.d;shResize();shInit();
+};
+$('#shBgRow').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $('#shBgRow').querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');SH.bg=b.dataset.b;shInit();
+};
+$('#shFxRow').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  b.classList.toggle('on');SH.modes[b.dataset.f]=b.classList.contains('on');shInit();
+};
+$('#shWordEdit').onclick=function(){
+  const d=$('#shWordsDisplay'),e=$('#shWordsEdit');
+  d.hidden=!d.hidden;e.hidden=!e.hidden;
+};
+$('#shWordsSave').onclick=()=>{
+  const raw=$('#shWordsText').value;
+  const words=raw.split(',').map(w=>w.trim().toUpperCase()).filter(Boolean);
+  if(words.length<2){toast('Need at least 2 words');return;}
+  SH_WORDS.length=0;SH_WORDS.push(...words);
+  $('#shWordsDisplay').textContent=words.join(', ');$('#shWordsDisplay').hidden=false;
+  $('#shWordsEdit').hidden=true;shInit();toast('Words updated');
+};
+
 /* ── showreel — optional, played inside the same drawer used for
    every single demo. No separate widget, so it can't get stuck in
    a half-loaded state: it's the exact code path already proven to
    work when a user taps any card. ── */
 const REEL=['blur-in','anime-stagger','gsap-bounce','three-blocks','gl-text-particles',
   'matter-letters','motion-spring','beam','gl-plasma','split-rise','marquee-3d','three-torus'];
-let reelMode=false,reelI=-1,reelT=null;
+let reelMode=false,reelI=-1,reelT=null,reelPending=false;
 function reelBadge(){
   const b=$('#reelBadge');
   if(!reelMode){b.hidden=true;return;}
@@ -741,18 +1186,20 @@ function reelBadge(){
   $('#reelExit').onclick=exitReel;
 }
 function exitReel(){reelMode=false;clearTimeout(reelT);reelT=null;reelBadge();}
+function startReel(){reelMode=true;reelI=-1;reelStep();}
 function reelStep(){
   reelI=(reelI+1)%REEL.length;
   const c=LIB.find(x=>x.id===REEL[reelI]);
   if(!c){reelT=setTimeout(reelStep,60);return;}
   openD(c);
   reelBadge();
-  reelT=setTimeout(reelStep,2800);
+  const wait=c.eng==='three'||c.eng==='matter'?4200:2800;
+  reelT=setTimeout(reelStep,wait);
 }
 $('#reelLink').onclick=()=>{
-  const missing=REEL.map(id=>LIB.find(x=>x.id===id)).filter(c=>c&&LOADED[c.eng]!==true);
-  if(missing.length){toast('Waiting for engines to load…');boot();return;}
-  reelMode=true;reelI=-1;reelStep();};
+  const missing=REEL.some(id=>{const c=LIB.find(x=>x.id===id);return c&&LOADED[c.eng]!==true;});
+  if(missing){reelPending=true;toast('Waiting for engines to load…');boot();return;}
+  startReel();};
 
 /* ── nav ── */
 function buildNav(){
@@ -777,14 +1224,16 @@ function buildNav(){
      '<span class="n">'+LIB.filter(x=>x.img).length+'</span></button>'+
    '<button class="navb'+(FAVONLY?' on':'')+'" data-fav="1">★ Favorites'+
      '<span class="n">'+FAV.size+'</span></button>'+
-   '<div class="sect">Catalog</div>'+
-   '<button class="navb" data-jump="1">Libraries<span class="n">'+LIBS.length+'</span></button>'+
-   (archUnlocked?'<div class="sect" style="margin-top:12px">Archives</div>'+
-    '<button class="navb'+(FILTER==='archive'&&!FAVONLY?' on':'')+'" data-f="archive" style="border-left-color:var(--warn);color:'+(FILTER==='archive'?'var(--warn)':'var(--ink3)')+'">'+
-    '📦 The Archive<span class="n">'+LIB.filter(isArchived).length+'</span></button>':'');
+    '<div class="sect">Catalog</div>'+
+    '<button class="navb" data-jump="1">Libraries<span class="n">'+LIBS.length+'</span></button>'+
+    '<button class="navb" data-new="1" style="border-left-color:var(--star);color:var(--star)">✚ New Component</button>'+
+    (archUnlocked?'<div class="sect" style="margin-top:12px">Archives</div>'+
+     '<button class="navb'+(FILTER==='archive'&&!FAVONLY?' on':'')+'" data-f="archive" style="border-left-color:var(--warn);color:'+(FILTER==='archive'?'var(--warn)':'var(--ink3)')+'">'+
+     '📦 The Archive<span class="n">'+LIB.filter(isArchived).length+'</span></button>':'');
   $('#nav').onclick=e=>{
     const b=e.target.closest('button');if(!b)return;
     if(b.dataset.jump){$('#libs').scrollIntoView({block:'start',behavior:'smooth'});closeRail();return;}
+    if(b.dataset.new){openCreator();closeRail();return;}
     if(b.dataset.fav){FAVONLY=true;}
     else{FILTER=b.dataset.f;FAVONLY=false;}
     paintFavCount();buildNav();buildChips();buildGrid();closeRail();scrollToGrid();
@@ -935,26 +1384,109 @@ function openD(c){
     '<span class="tx '+(c.img?'img':c.txt?'yes':'')+'">'+
     (c.img?'uses your image':c.txt?'takes text':'geometry only')+'</span>';
   $('#dfav').textContent=FAV.has(c.id)?'★':'☆';
-  $('#djs').value=get(c,'js');
-  $('#dcss').value=get(c,'css');
-  $('#dtags').innerHTML=c.tags.map(t=>'<span class="tag">'+t+'</span>').join('');
+  $('#djs').value=get(c,'js');syncLines('jln',$('#djs'));
+  $('#dcss').value=get(c,'css');syncLines('cln',$('#dcss'));
+  $('#dname').value=c.name;
+  buildTags(c.tags);
+  buildCatRow(c.cat);
+  $('#dtxt').checked=!!c.txt;
+  $('#dimg').checked=!!c.img;
   paintDirty();paintPkg();
+  buildJsonTab(c);
   const lib=LIBS.find(l=>l.eng===c.eng);
   $('#dcred').innerHTML=lib
     ? 'Demo code is Lok original (MIT). Engine is <a href="'+CRED[c.eng].u+
       '" target="_blank" rel="noopener">'+CRED[c.eng].n+'</a> — see their license.'
     : 'Lok original — MIT. Yours to keep.';
   mountStage($('#dstage'),c);
+  switchDrawerTab('edit');
   $('#scrim').classList.add('on');$('#drawer').classList.add('on');
 }
 function closeD(){
   $('#scrim').classList.remove('on');$('#drawer').classList.remove('on');
+  $('#stngPanel').classList.remove('on');
   unmountStage($('#dstage'));
   if(reelMode)exitReel();
 }
+function switchDrawerTab(tab){
+  $('#drawer').querySelectorAll('.dtab-b').forEach(b=>b.classList.toggle('on',b.dataset.dtab===tab));
+  $('#drawer').querySelectorAll('.dtab-p').forEach(p=>p.classList.toggle('on',p.dataset.dtab===tab));
+}
+$('#drawer').addEventListener('click',e=>{
+  const tb=e.target.closest('.dtab-b');
+  if(tb)switchDrawerTab(tb.dataset.dtab);
+});
+function buildTags(tags){
+  const h=$('#dtags');
+  h.innerHTML=(tags||[]).map(t=>'<span class="tag">'+esc(t)+'<button class="tag-x" data-tag="'+esc(t)+'">✕</button></span>').join('');
+}
+$('#dtags').addEventListener('click',e=>{
+  const x=e.target.closest('.tag-x');
+  if(x&&CUR){
+    const t=x.dataset.tag;
+    const tags=(EDIT[CUR.id]&&EDIT[CUR.id].tags)||[...CUR.tags];
+    const idx=tags.indexOf(t);
+    if(idx>-1){tags.splice(idx,1);EDIT[CUR.id]={...(EDIT[CUR.id]),tags};buildTags(tags);stashMeta();}
+  }
+});
+$('#dtagAdd').onclick=()=>{
+  const w=$('#dtagWrap'),inp=$('#dtagInp');
+  if(!w.hidden){const v=inp.value.trim();if(v&&CUR){
+    const tags=(EDIT[CUR.id]&&EDIT[CUR.id].tags)||[...CUR.tags];
+    if(!tags.includes(v)){tags.push(v);EDIT[CUR.id]={...(EDIT[CUR.id]),tags};buildTags(tags);stashMeta();}
+    inp.value='';w.hidden=true;return;}
+  }w.hidden=false;inp.focus();};
+$('#dtagInp').addEventListener('keydown',e=>{if(e.key==='Enter')$('#dtagAdd').click();if(e.key==='Escape'){$('#dtagWrap').hidden=true;}});
+function buildCatRow(sel){
+  $('#dCatRow').innerHTML=CATS.map(c=>
+    '<button class="'+(c.id===sel?'on':'')+'" data-cat="'+c.id+'">'+c.label+'</button>').join('');
+}
+$('#dCatRow').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||!CUR)return;
+  const cat=b.dataset.cat;
+  EDIT[CUR.id]={...(EDIT[CUR.id]),cat};stashMeta();
+  $('#dCatRow').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.cat===cat));
+});
+$('#dname').oninput=function(){if(!CUR)return;
+  EDIT[CUR.id]={...(EDIT[CUR.id]),name:this.value};stashMeta();};
+$('#dtxt').onchange=function(){if(!CUR)return;
+  EDIT[CUR.id]={...(EDIT[CUR.id]),txt:this.checked?1:0};stashMeta();};
+$('#dimg').onchange=function(){if(!CUR)return;
+  EDIT[CUR.id]={...(EDIT[CUR.id]),img:this.checked?1:0};stashMeta();};
+function stashMeta(){
+  const e=EDIT[CUR.id]||{};
+  EDIT[CUR.id]={js:e.js??get(CUR,'js'),css:e.css??get(CUR,'css'),name:e.name??CUR.name,
+    tags:e.tags??[...CUR.tags],cat:e.cat??CUR.cat,txt:e.txt??CUR.txt,img:e.img??CUR.img};
+  paintDirty();buildGrid();
+}
+function buildJsonTab(c){
+  const o={id:c.id,name:EDIT[c.id]?.name||c.name,cat:EDIT[c.id]?.cat||c.cat,
+    eng:c.eng,txt:EDIT[c.id]?.txt??c.txt,img:EDIT[c.id]?.img??c.img,
+    tags:EDIT[c.id]?.tags||[...c.tags],css:get(c,'css'),js:get(c,'js')};
+  $('#djson').textContent=JSON.stringify(o,null,2);
+}
+$('#djsonCopy').onclick=()=>{const j=$('#djson').textContent;
+  if(j)copy(j,'JSON copied');};
+$('#djsonDl').onclick=()=>{const j=$('#djson').textContent;if(!j)return;
+  const b=new Blob([j],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download=(CUR?CUR.id:'component')+'.json';a.click();
+  URL.revokeObjectURL(a.href);toast('Downloaded');};
+$('#djsonImpBtn').onclick=()=>{
+  const v=$('#djsonImp').value.trim();if(!v){toast('Paste JSON first');return;}
+  try{const o=JSON.parse(v);
+    if(!o.id||!o.js){toast('Invalid component: need id and js');return;}
+    USER_COMP.push(o);$('#djsonImp').value='';toast('Imported! Added to grid');
+    buildNav();buildChips();buildGrid();buildLibs();
+  }catch(e){toast('Invalid JSON: '+e.message);}};
+
 function paintDirty(){
+  if(!CUR)return;
   const d=dirty(CUR)?'<span class="lic v" style="font-size:8.5px">edited</span>':'';
   $('#jdirty').innerHTML=d;$('#cdirty').innerHTML=d;
+  const hasMeta=EDIT[CUR.id]&&(EDIT[CUR.id].name||EDIT[CUR.id].tags||EDIT[CUR.id].cat
+    ||EDIT[CUR.id].txt!==undefined||EDIT[CUR.id].img!==undefined);
+  $('#ndirty').innerHTML=hasMeta?'<span class="lic v" style="font-size:8.5px">edited</span>':'';
 }
 function paintPkg(){
   const lib=LIBS.find(l=>l.eng===CUR.eng);
@@ -969,22 +1501,47 @@ $('#pkg').onclick=e=>{const b=e.target.closest('[data-p]');
   if(b){PKG=b.dataset.p;paintPkg();buildLibs();}};
 $('#dcmd').onclick=()=>copy($('#dcmd').textContent,'Command copied');
 $('#dfav').onclick=()=>toggleFav(CUR.id);
-$('#dx').onclick=closeD;$('#scrim').onclick=closeD;
+$('#dx').onclick=closeD;
+function anyPanelOpen(){return $('#drawer').classList.contains('on')||$('#stngPanel').classList.contains('on');}
+$('#scrim').onclick=()=>{closeD();$('#stngPanel').classList.remove('on');};
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'&&$('#drawer').classList.contains('on'))closeD();});
+  if(e.key==='Escape'&&anyPanelOpen()){closeD();$('#stngPanel').classList.remove('on');}});
 
-function stash(){EDIT[CUR.id]={css:$('#dcss').value,js:$('#djs').value};paintDirty();}
+/* ── line number sync ── */
+function syncLines(id,ta){
+  const ln=$('#'+id);if(!ln)return;
+  const lines=ta.value.split('\n').length;
+  ln.innerHTML=Array.from({length:lines},(_,i)=>'<span>'+(i+1)+'</span>').join('');
+}
+$('#djs').addEventListener('input',function(){syncLines('jln',this);});
+$('#dcss').addEventListener('input',function(){syncLines('cln',this);});
+
+function stash(){EDIT[CUR.id]={...EDIT[CUR.id],css:$('#dcss').value,js:$('#djs').value};paintDirty();}
 let ct;
 $('#dcss').oninput=()=>{if(reelMode)exitReel();clearTimeout(ct);
-  ct=setTimeout(()=>{stash();mountStage($('#dstage'),CUR);},320);};
+  ct=setTimeout(()=>{stash();mountStage($('#dstage'),CUR);buildJsonTab(CUR);},320);};
 $('#djs').addEventListener('focus',()=>{if(reelMode)exitReel();});
 $('#jrun').onclick=()=>{stash();mountStage($('#dstage'),CUR);toast('Ran');};
-$('#jrst').onclick=()=>{$('#djs').value=CUR.js;
+$('#jrst').onclick=()=>{$('#djs').value=CUR.js;syncLines('jln',$('#djs'));
   if($('#dcss').value===CUR.css)delete EDIT[CUR.id];else stash();
   paintDirty();mountStage($('#dstage'),CUR);toast('JS reset');};
-$('#crst').onclick=()=>{$('#dcss').value=CUR.css;
+$('#crst').onclick=()=>{$('#dcss').value=CUR.css;syncLines('cln',$('#dcss'));
   if($('#djs').value===CUR.js)delete EDIT[CUR.id];else stash();
   paintDirty();mountStage($('#dstage'),CUR);toast('CSS reset');};
+/* format helpers */
+function fmtJS(s){try{
+  let out='',depth=0;
+  for(const c of s){if(c==='{'){out+='{\n'+'  '.repeat(++depth);}
+   else if(c==='}'){out+='\n'+'  '.repeat(--depth)+'}';}
+   else if(c===';'){out+=';\n'+'  '.repeat(depth);}
+   else{out+=c;}}
+  return out.replace(/\n{3,}/g,'\n\n').replace(/ +$/gm,'').trim();
+ }catch(e){return s;}}
+function fmtCSS(s){return fmtJS(s);}
+$('#jfmt').onclick=function(){
+  const ta=$('#djs');ta.value=fmtJS(ta.value);syncLines('jln',ta);stash();mountStage($('#dstage'),CUR);};
+$('#cfmt').onclick=function(){
+  const ta=$('#dcss');ta.value=fmtCSS(ta.value);syncLines('cln',ta);stash();mountStage($('#dstage'),CUR);};
 $('#dcopy').onclick=()=>{
   const lib=LIBS.find(l=>l.eng===CUR.eng);
   const head=lib
@@ -1042,13 +1599,14 @@ function refreshText(t){
         }
       }
     }
+    if(h._stops)h._stops.forEach(f=>{try{f();}catch(e){}});
+    const hEng=h._comp.eng==='css'||h._comp.eng==='gl'?null:(ENG[h._comp.eng]||null);
     const stops=[];
     try{
       const fn=new Function('root','text','eng','esc','chars','img','onStop','DPR',cs);
-      fn(box,t||' ',null,esc,chars,IMG,
+      fn(box,t||' ',hEng,esc,chars,IMG,
          f=>{if(typeof f==='function')stops.push(f);},DPR);
     }catch(e){return;}
-    if(h._stops)h._stops.forEach(f=>{try{f();}catch(e){}});
     h._stops=stops;
   });
   if($('#drawer').classList.contains('on')&&CUR&&CUR.txt){
@@ -1173,6 +1731,76 @@ const endDrag=()=>{
 };
 rail.addEventListener('touchend',endDrag,{passive:true});
 rail.addEventListener('touchcancel',endDrag,{passive:true});
+
+/* ── Component Creator ── */
+function openCreator(){
+  $('#cmodScrim').hidden=false;$('#cmod').hidden=false;
+  $('#cname').value='';$('#cid').value='';$('#ccss').value='';$('#cjs').value='';
+  $('#ctags').value='';$('#ctxt').checked=true;$('#cimg').checked=false;
+  $('#cTestStage').innerHTML='';
+  const cats=CATS.map(c=>'<button data-ccat="'+c.id+'"'+(c.id==='text'?' class="on"':'')+'>'+c.label+'</button>').join('');
+  $('#cCatRow').innerHTML=cats;
+  const engs=ENGS.map(([e,l])=>'<button data-ceng="'+e+'"'+(e==='css'?' class="on"':'')+'>'+l+'</button>').join('');
+  $('#cEngRow').innerHTML=engs;
+}
+function closeCreator(){$('#cmodScrim').hidden=true;$('#cmod').hidden=true;}
+$('#cmodScrim').onclick=closeCreator;
+$('#cmodX').onclick=closeCreator;
+$('#cname').oninput=function(){
+  const v=this.value.trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  $('#cid').value=v||'my-component';
+};
+$('#cCatRow').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $('#cCatRow').querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+};
+$('#cEngRow').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $('#cEngRow').querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+};
+$('#ccssDemo').onclick=()=>{
+  $('#ccss').value='.s{display:grid;place-items:center;height:100%;\n  font:900 clamp(20px,6vw,34px)/1 Archivo,sans-serif;\n  color:#5EEAD4;text-align:center}';
+};
+$('#cTest').onclick=()=>{
+  const id=$('#cid').value||'test';
+  const css=$('#ccss').value;
+  const js=$('#cjs').value;
+  const cat=$('#cCatRow').querySelector('.on')?.dataset.ccat||'text';
+  const eng=$('#cEngRow').querySelector('.on')?.dataset.ceng||'css';
+  const txt=$('#ctxt').checked?1:0;
+  const img=$('#cimg').checked?1:0;
+  const tags=$('#ctags').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const testComp={id,name:$('#cname').value||'Test',cat,eng,txt,img,tags,css,js};
+  const host=$('#cTestStage');
+  host.innerHTML='';
+  const st=document.createElement('div');st.style.cssText='width:100%;height:100%;position:relative';
+  host.appendChild(st);
+  mountStage(st,testComp);
+};
+$('#cSave').onclick=()=>{
+  const id=$('#cid').value||'my-component';
+  const name=$('#cname').value||'My Component';
+  const css=$('#ccss').value;
+  const js=$('#cjs').value;
+  if(!js.trim()){toast('Need JavaScript code');return;}
+  const cat=$('#cCatRow').querySelector('.on')?.dataset.ccat||'text';
+  const eng=$('#cEngRow').querySelector('.on')?.dataset.ceng||'css';
+  const txt=$('#ctxt').checked?1:0;
+  const img=$('#cimg').checked?1:0;
+  const tags=$('#ctags').value.split(',').map(s=>s.trim()).filter(Boolean);
+  if(USER_COMP.some(c=>c.id===id)){toast('ID "'+id+'" already exists');return;}
+  if(_LIB.some(c=>c.id===id)){toast('ID "'+id+'" conflicts with built-in component');return;}
+  const comp={id,name,cat,eng,txt,img,tags,css,js};
+  USER_COMP.push(comp);
+  LIB=_LIB.concat(USER_COMP);
+  closeCreator();
+  buildNav();buildChips();buildGrid();buildLibs();
+  toast('Created: '+name);
+};
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&!$('#cmod').hidden)closeCreator();});
 
 /* ── The Archive — secret feature ──
    Type iloveyoumerci anywhere to unlock. Konami-code style. */
