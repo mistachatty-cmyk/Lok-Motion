@@ -150,6 +150,13 @@ All changes must be documented in this file and MASTER-ROADMAP.md.
 4. Update this file with the change
 5. Update MASTER-ROADMAP.md change log
 
+### Hotfix: Import error broke entire app — sidebar + grid missing (Jul 2026)
+- **Issue**: Left sidebar, grid, and all UI disappeared; page showed blank shell
+- **Root cause**: Line 799 `import { ... _LIB, ... }` — `_LIB` is not an export of `lok-components.js` (exports `LIB`). ES module import failed silently, blocking all JS execution
+- **File & lines**: `index.html:799`
+- **Fix**: Changed to `import { LIB as ORIG_LIB, ... }` — uses correct ES module rename syntax
+- **Also**: `_LIB` references in creator JS changed to `ORIG_LIB`
+
 ### Hotfix: Half-word rendering on text change (Jul 2026)
 - **Issue**: When text changed via rotator or typing, engine-based components (anime, gsap, motion, three, matter) showed half or broken words
 - **Root cause**: `refreshText()` re-executed component JS with `eng=null` for ALL components. Engine-based components received `null` instead of their loaded engine module, silently failing in the try/catch
