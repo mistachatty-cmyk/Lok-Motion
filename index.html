@@ -842,6 +842,7 @@ textarea:focus{border-color:var(--accd)}
 import { LokRotator, autoInit, EFFECT_NAMES } from './lok-rotator.js';
 
 import { BRANDS, ADS, CATS, ENGS, CRED, CSS_LIB, ENGINE_LIB, ARCHIVE_LIB, LIB as ORIG_LIB, LIBS, PKGS } from './lok-components.js';
+const USER_COMP=[]; const USER_COMP_KEY='lokmotion.user_comps';
 let LIB=ORIG_LIB.concat(USER_COMP);
 
 /* ═══════════════════════════════════════════════════════════
@@ -863,7 +864,6 @@ const DPR=Math.min(window.devicePixelRatio||1,2);
 const ENG={},LOADED={css:true,gl:true,anime:false,gsap:false,motion:false,three:false,matter:false};
 let TEXT=BRANDS[0], FILTER='all', PKG='npm', FAVONLY=false, CUR=null;
 const EDIT={};
-const USER_COMP=[]; const USER_COMP_KEY='lokmotion.user_comps';
 function syncUserComp(){
   try{localStorage.setItem(USER_COMP_KEY,JSON.stringify(USER_COMP.slice(0,4)));}catch(e){}
   LIB=ORIG_LIB.concat(USER_COMP);
